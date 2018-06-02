@@ -1,0 +1,41 @@
+<html >
+<body  ng-app="myModule">
+ <script src="angular.min.js"></script>
+<script>
+var a=angular.module("myModule",[]);
+a.service('chitra',function(){
+    this.authenticate=function(x,y){
+       if(x == "anju" && y == "saisirish") {
+           return true;
+       }else { return false;}
+    }
+});
+a.controller("controllerOne",function($scope,$rootScope,chitra)
+{
+    $rootScope.login=true;
+    $rootScope.home=false;
+ $scope.button_clicked=function()   {
+  var valid=chitra.authenticate($scope.name,$scope.pwd);
+alert(valid);
+ }
+});
+a.controller("controllerTwo",function($scope)
+{
+});
+</script>
+<div ng-controller="controllerOne" ng-show="login" >
+name:
+<input type="text" ng-model="name" placeholder="enter name " >
+<br>
+password:
+<input type="password" ng-model="pwd" placeholder="enter password">
+<br>
+{{message}}
+<button ng-click="button_clicked()">SUBMIT</button>
+<br>
+</div>
+<div ng-controller="controllerTwo" ng-show="home">
+welcome to home page{{message}}
+</div>
+</body>
+</html>

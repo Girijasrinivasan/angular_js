@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="demoApp" >
+<head>
+    <title>AngularJS : Multiple Controllers Demo</title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script src="angular.js"></script>
+    <script>
+
+        var firstApp = angular.module("demoApp", []);
+
+        firstApp.controller("lectureCtrl", function ($scope) {
+            var lectureNames = ["sunday - OPERATING SYSTEM",
+                                "monday - MICROPROCESSOR",
+                                "tuesday - MATHS", 
+                                "wednesday - DBMS",
+                                "thursday - ROBOTICS", 
+                                "friday - DATA MINING",
+                                "saturday - DIGITAL LOGIC"]; 
+          
+        $scope.lectures = lectureNames[new Date().getDay()];
+        });
+      
+        firstApp.controller("dayBeforeYesterdayCtrl", function ($scope) {
+            var lectureNames = ["sunday - OPERATING SYSTEM",
+                                "monday - MICROPROCESSOR",
+                                "tuesday - MATHS", 
+                                "wednesday - DBMS",
+                                "thursday - ROBOTICS", 
+                                "friday - DATA MINING",
+                                "saturday - DIGITAL LOGIC"]; 
+          
+        $scope.yesterday = lectureNames[(new Date().getDay() - 2) % 7];
+        });
+
+    </script>
+
+</head>
+<body>
+    <div class="panel">
+        <div class="page-header">
+            <h3>AngularJS App</h3>
+        </div>
+      <h4 ng-controller="lectureCtrl">
+        Today Lecture Session : {{lectures || "(NA)"}}</h4>
+      
+      <h4 ng-controller="dayBeforeYesterdayCtrl">
+        Day Before Yesterday Lecture Session : {{yesterday || "(NA)"}}</h4>
+    </div>
+</body>
+</html>

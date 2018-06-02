@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body ng-app="myApp">
+<script src="angular.min.js"></script>
+    <script>
+    var app = angular.module('myApp', []);
+    app.service('girija',function(){
+    this.authenticate=function(x,y){
+       if(x == "girija" && y == "51997") {
+           return true;
+       }else 
+	{ 
+	return false;}
+    }
+    });
+    app.controller('myctrl', function($scope,$rootScope,girija) {
+    $rootScope.login=true;
+    $rootScope.home=false;
+    $scope.submit=function()
+   {
+    var valid=girija.authenticate($scope.usrname,$scope.password);
+    alert(valid);
+    if(valid == true)
+    {
+    $rootScope.login=false;
+    $rootScope.home=true;
+     }
+else
+{
+$rootScope.home=false;
+    $rootScope.login=true;
+    $scope.message="invalid user";
+}
+}	
+ });
+    app.controller('homectrl', function($scope,$rootScope,girija) {
+    $scope.logout=function(){
+    $rootScope.home=false;
+    $rootScope.login=true;
+}
+});
+ </script>
+ <div  ng-controller="myctrl" ng-show="login">
+ User name:<br>
+  <input type="text" name="usrname" ng-model="usrname">
+  <br>
+ Password:<br>
+  <input type="text" name="password" ng-model="password">
+  <br>
+ <input type="submit" name="submit" ng-click="submit()">
+ </div>
+ <div ng-controller="homectrl" ng-show="home">
+ welcome to home page
+ <br>
+ <button ng-click="logout()">logout</button>
+ </div>
+   </body>
+   </html>

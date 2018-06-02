@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script src="angular.min.js"></script>
+<body>
+
+<script>
+var app = angular.module("myShoppingList", []);
+app.service('food',function(){
+this.products=function()
+{
+var item=[
+{name:"ice cream",price:"65"},
+{name:"fruit salad",price:"150"},
+{name:"hot chocolate",price:"100"}
+];
+
+return item;
+
+}
+
+} );
+app.controller("myCtrl", function($scope,food) {
+    $scope.products = food.products();
+	
+
+});
+
+
+</script>
+
+<div ng-app="myShoppingList" ng-controller="myCtrl"><br>
+<div ng-repeat='x in products'>
+
+  <br>
+  {{x.name}}         {{x.price}}
+  <button ng-click="count = count + 1" ng-init="count=0">+</button>
+  <button ng-click="count = count - 1" ng-init="count=0">-</button>  {{count}}
+ <p>total:{{count*x.price}}</p>
+ </div>
+ <button ng-click="total = <span> ng-bind="(count*x.price) + ' ' +(count*x.price) + ' ' +(count*x.price)">
+ </span>" <ng-init="total=0">total</button>  
+ {{total}}
+</div>
+</div>
+
+
+</body>
+</html

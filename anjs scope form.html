@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script src="angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="personCtrl">
+ First name:<br>
+  <input type="text" name="firstName" ng-model="firstName">
+  <br>
+  Last name:<br>
+  <input type="text" name="lastName" ng-model="lastName">
+  <br>
+  DOB:<br>
+  <input type="text" name="dob" ng-model="dob">
+  <br>
+  Gender:</label>
+ <input type="radio" name="gender" value="male" />Male
+ <input type="radio" name="gender" value="female" />Female
+ <br>
+ 
+  <input type="button" value="click" ng-click="button_clicked()"/>
+   </div>
+  <script>
+   angular.module('myApp', []).controller('personCtrl', function($scope) {
+    $scope.firstName;
+    $scope.lastName;
+    $scope.dob;
+    $scope.gender;
+    $scope.button_clicked = function()
+    {return $scope.firstName  + " " + $scope.lastName + " " + $scope.dob + " " + $scope.gender;}
+    
+});
+</script>
+
+</body>
+</html>

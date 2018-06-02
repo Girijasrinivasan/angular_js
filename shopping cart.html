@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module("myModule", [])
+	.controller("myController", function($scope){
+	$scope.carts=[];
+	$scope.products = [
+	{p_id: "1", p_name: "sweet corn",p_price:120},
+	{p_id: "2", p_name: "burger",p_price:120},
+	{p_id: "3", p_name: "frankies",p_price:45},
+	{p_id: "4", p_name: "drinks",p_price:350},
+	{p_id: "5", p_name: "french fries",p_price:100}
+	]; 
+ 
+	        $scope.add_cart = function(product){ 
+		if(product){
+		$scope.carts.push({p_id: product.p_id, p_name: product.p_name, p_price: product.p_price}); 
+		}	
+	}
+ 
+ 
+	$scope.total = 0; 
+        $scope.setTotals = function(cart){ 
+        if(cart){ 
+		  $scope.total += cart.p_price; 
+				}
+	}
+ 
+	$scope.remove_cart = function(cart){ 
+		if(cart){ 
+			$scope.carts.splice($scope.carts.indexOf(cart), 1);  
+			$scope.total -= cart.p_price; 
+			}
+	}
+	});
+</script>
+<head>
+<meta charset = "UTF-16" name = "viewport" content = "width=device-width, initial-scale=1" />
+
+</head>
+<body> 
+    <div style="height:60px;width:100%;text-align:center;float:left;">
+	<h2>DONALD'S KITCHEN</h2> 
+	</div>
+	<div class = "b" ng-app = "myModule" ng-controller = "myController">
+	<h5>SHOPPING CART</h5>
+	<div id="product">
+    <table class="table">
+		<thead>
+		<tr><th>PRODUCT</th>
+		<th>PRICE</th>
+		<th>ADDITEMS</th></tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "product in products ">
+		<td>{{product.p_name}}</td>
+		<td class="l">Rs.{{product.p_price}}</td>
+		<td class="l"><button type = "button" ng-click = "add_cart(product)">+</button></td></tr>
+		</tbody>
+		</table>
+		</div>
+	<h5>MY CART</h5>
+	<table class = "table">
+	<thead>
+	<tr>
+        <th>PRODUCT</th>
+        <th>PRICE</th>
+	<th>REMOVE</th></tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat = "cart in carts" ng-init = "setTotals(cart)">
+	<td>{{cart.p_name}}</td>
+	<td>Rs.{{cart.p_price}}</td>
+	<td class="l"><button type = "button" ng-click = "remove_cart(cart)">-</button></td>
+	<td></td></tr>
+	<tr>
+        <td>TOTAL</td><td>Rs.{{total}}</td></tr>
+	</tbody>
+	</table>
+</div>
+
+</body>	
+</html>
